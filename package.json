@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
+    "coi-serviceworker": "^0.1.7",
     "fflate": "^0.8.3",
     "js-dos": "^8.4.1",
     "react": "^19.2.8",

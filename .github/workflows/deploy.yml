@@ -1,0 +1,54 @@
+name: Deploy to GitHub Pages
+
+# 推送 master 分支时执行，也允许在 GitHub 手动执行
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+# 给自动部署任务所需的权限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时间只执行一个 Pages 部署
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: 获取仓库代码
+        uses: actions/checkout@v7
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: 安装项目依赖
+        run: npm ci
+
+      - name: 构建网站
+        run: npm run build
+
+      - name: 配置 Pages
+        uses: actions/configure-pages@v6
+
+      - name: 上传构建产物
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+      - name: 发布网站
+        id: deployment
+        uses: actions/deploy-pages@v5
