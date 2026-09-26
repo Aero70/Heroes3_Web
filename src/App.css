@@ -1,0 +1,131 @@
+
+.tile {
+  background-image: url("../src/assets/bg.bmp");
+  background-repeat: repeat;
+  background-size: auto;
+  background-position: left top;
+}
+
+@property --beam-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.loading-beam {
+  background-image:
+    repeating-linear-gradient(
+      100deg,
+      #ffffff55 0%,
+      #ffffff55 7%,
+      transparent 10%,
+      transparent 12%,
+      #ffffff55 16%
+    ),
+    repeating-linear-gradient(
+      100deg,
+      transparent 10%,
+      #fff3db84 15%,
+      #ffe9bd84 15%,
+      #2e2a5198 30%,
+      #e2fffa84 31%,
+      #2d4953a9 32%,
+      transparent 40%,
+      transparent 45%,
+      #ffe9bd84 50%,
+      #fff3dc84 55%,
+      #ffe2e284 58%,
+      #2d4953a9 60%,
+      #2e2a5198 61%,
+      transparent 65%
+    );
+
+  background-size: 300% 100%, 200% 100%;
+  background-position: 50% 50%, 50% 50%;
+
+  mask-image: radial-gradient(
+    ellipse at 100% 0%,
+    black 10%,
+    transparent 70%
+  );
+
+  filter: blur(10px);
+  opacity: 0.5;
+  animation: aurora-drift 64s linear infinite alternate;
+}
+
+@keyframes aurora-drift {
+  to {
+    background-position: 150% 50%, 100% 50%;
+  }
+}
+
+.card {
+  width: 16rem;
+  height: 16rem;
+  flex-shrink: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+
+  perspective: 900px;
+
+  & > span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+
+    transform-style: preserve-3d;
+    transform:
+      rotateX(var(--rotate-x, 0deg))
+      rotateY(var(--rotate-y, 0deg));
+
+    transition: transform 180ms ease-out;
+    box-shadow: 0 18px 35px rgb(0 0 0 / 35%);
+
+    pointer-events: none;
+  }
+}
+
+.card_background,
+.card_character_hota,
+.card_character {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+}
+.card_background {
+  object-fit: cover;
+  border-radius: 12px;
+}
+.card_character_hota{
+  object-fit: contain;
+  transform-origin: bottom;
+  transform: translateZ(-20px) rotateX(-15deg) scale(1);
+  transition: transform 250ms ease-out;
+}
+.card_character {
+  object-fit: contain;
+
+  transform: translateZ(45px) scale(1);
+  transition: transform 250ms ease-out;
+}
+.card:hover .card_character_hota {
+  transform: translateZ(-25px) rotateX(-15deg) scale(1.05);
+}
+.card:hover .card_character  {
+  transform: translateZ(45px) scale(1.1);
+}
+
+@media (width >= 40rem) {
+  .card {
+    width: 24rem;
+    height: 24rem;
+  }
+}
