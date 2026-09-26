@@ -10,7 +10,7 @@ function App() {
         <PageLayout />
       </main>
 
-      <div className='fixed z-100 '>
+      <div className='fixed z-100 hidden lg:block'>
         <div className='fixed bottom-6 left-[34px] flex flex-col text-[#fff6d6]/40 text-[.7rem] '>
           <span>技术学习项目 · 仅供学习交流</span>
           <span className='cursor-pointer' onClick={() => window.open("https://github.com/Aero70")}>github: https://github.com/Aero70</span>

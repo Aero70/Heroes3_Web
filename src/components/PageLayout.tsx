@@ -264,7 +264,7 @@ export default function PageLayout () {
         </div> }
 
         <section className="relative w-full min-h-screen lg:h-screen lg:overflow-hidden z-10">
-            {!isStartGame && <div className="min-h-screen lg:h-full flex flex-col items-center lg:justify-center gap-6 lg:gap-12 z-10 mb-40">
+            {!isStartGame && <div className="min-h-screen lg:h-full flex flex-col items-center lg:justify-center gap-6 lg:gap-12 z-10">
                 <div className="h-fit py-5 flex flex-col lg:flex-row gap-4 lg:gap-16 items-center justify-center">
                     <GameCard
                         title="深渊号角"
@@ -318,7 +318,6 @@ export default function PageLayout () {
                         </div>
                     </InfoBox>
                 </div>
-                
             </div>}
             
             <canvas
@@ -332,11 +331,9 @@ export default function PageLayout () {
             />
 
             {isStartGame && (
-                <button
-                    type="button"
+                <button type="button"
                     onClick={handleLandscape}
-                    className="fixed right-4 top-4 z-[100] rounded
-                            bg-black/70 px-3 py-2 text-sm text-[#fff6d6]"
+                    className="fixed right-4 top-4 z-[100] rounded bg-black/70 px-3 py-2 text-sm text-[#fff6d6]"
                 >
                     全屏横屏
                 </button>
