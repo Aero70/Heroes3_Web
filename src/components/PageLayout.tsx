@@ -321,7 +321,11 @@ export default function PageLayout () {
             </div>}
             
             <canvas
-                className="block w-full max-h-screen max-w-auto lg:max-w-[1800px] h-auto z-5"
+                className={`
+                    absolute top-0 left-1/2 -translate-x-1/2
+                    block w-full h-auto max-h-screen lg:max-w-[1800px] z-5
+                    ${isStartGame ? "visible" : "invisible pointer-events-none"}
+                `}
                 onContextMenu={event => event.preventDefault()}
                 id="canvas"
                 ref={canvasRef}
