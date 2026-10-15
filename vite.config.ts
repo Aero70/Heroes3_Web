@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  base: "/Heroes3/",
+  base: "/Heroes3_Web/",
   plugins: [
     tailwindcss(),
     react()
