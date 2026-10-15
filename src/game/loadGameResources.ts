@@ -2,7 +2,7 @@ import type { Unzipped } from "fflate";
 import type { UnzipReply } from "./unzip.worker";
 import type { VcmiEngine } from "./loadEngine";
 
-export const Source = `http://110.40.207.238`; // 游戏资源源域名
+export const Source = `https://www.aero70.site`; // 游戏资源源域名
 
 
 export async function loadGameResources(
