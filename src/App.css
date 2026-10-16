@@ -1,3 +1,7 @@
+/* 任意祖先元素进入全屏时，隐藏游戏全屏按钮。 */
+:fullscreen .game-fullscreen-button {
+  display: none;
+}
 
 .tile {
   background-image: url("../src/assets/bg.bmp");

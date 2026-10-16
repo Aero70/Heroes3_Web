@@ -89,11 +89,6 @@ export default function PageLayout () {
             return
         }
 
-        // 主要输入设备是触屏时，将游戏全屏和横屏
-        if (window.matchMedia("(pointer: coarse)").matches) {
-            void handleLandscape();
-        }
-
         await handleInitialize();
         setIsLoad(true);
 
@@ -326,19 +321,29 @@ export default function PageLayout () {
                 </div>
             </div>}
             
-            <canvas
-                className={`
-                    absolute top-0 left-1/2 -translate-x-1/2
-                    block w-full h-auto max-h-screen lg:max-w-[1800px] z-5
+            <div
+                className={`absolute top-0 left-0 z-5 flex w-full flex-col items-center
                     ${isStartGame ? "visible" : "invisible pointer-events-none"}
                 `}
-                onContextMenu={event => event.preventDefault()}
-                id="canvas"
-                ref={canvasRef}
-                width={1800}  
-                height={1000}
-                tabIndex={0}
-            />
+            >
+                <canvas
+                    className="block w-full h-auto max-h-screen lg:max-w-[1800px]"
+                    onContextMenu={event => event.preventDefault()}
+                    id="canvas"
+                    ref={canvasRef}
+                    width={1800}
+                    height={1000}
+                    tabIndex={0}
+                />
+
+                {isStartGame && (
+                    <button type="button" onClick={handleLandscape}
+                        className=" game-fullscreen-button my-4 rounded border border-amber-200/50 bg-black/70 px-6 py-3 text-[#fff6d6] lg:hidden"
+                    >
+                        全屏游玩
+                    </button>
+                )}
+            </div>
 
             {!isStartGame && (
                 <div>
