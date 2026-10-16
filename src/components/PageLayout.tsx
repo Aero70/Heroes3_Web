@@ -89,6 +89,11 @@ export default function PageLayout () {
             return
         }
 
+        // 主要输入设备是触屏时，将游戏全屏和横屏
+        if (window.matchMedia("(pointer: coarse)").matches) {
+            void handleLandscape();
+        }
+
         await handleInitialize();
         setIsLoad(true);
 
@@ -182,10 +187,7 @@ export default function PageLayout () {
                     }
                 })
             )
-            // 主要输入设备是触屏时，将游戏全屏和横屏
-            if (window.matchMedia("(pointer: coarse)").matches) {
-                handleLandscape();
-            }
+            
             setStatusText(`已导入 ${resources.count} 个文件，正在启动游戏……`);
 
             engine.gameStarted = () => {
