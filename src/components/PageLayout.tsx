@@ -88,6 +88,7 @@ export default function PageLayout () {
         if(isLoad){
             return
         }
+
         await handleInitialize();
         setIsLoad(true);
 
@@ -186,6 +187,11 @@ export default function PageLayout () {
 
             engine.gameStarted = () => {
                 setStatusText("游戏已启动。");
+                
+                // 主要输入设备是触屏时，将游戏全屏和横屏
+                if (window.matchMedia("(pointer: coarse)").matches) {
+                    handleLandscape();
+                }
                 setIsStartGame(true);
             }
             canvas.focus();
@@ -278,7 +284,7 @@ export default function PageLayout () {
 
                     <GameCard
                         title="经典原版"
-                        subtitle="v4.0 HD 完美版"
+                        subtitle="VCMI Version"
                         background={classicBackground}
                         themeColor="#716347"
                         character={classicCharacter}
@@ -333,15 +339,6 @@ export default function PageLayout () {
                 height={1000}
                 tabIndex={0}
             />
-
-            {isStartGame && (
-                <button type="button"
-                    onClick={handleLandscape}
-                    className="fixed right-4 top-4 z-[100] rounded bg-black/70 px-3 py-2 text-sm text-[#fff6d6]"
-                >
-                    全屏横屏
-                </button>
-            )}
 
             {!isStartGame && (
                 <div>
