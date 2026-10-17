@@ -38,13 +38,10 @@ export async function loadEngine(
 
     // 当前 vcmi 是支持多线程的网页构建 同时使用了Web Worker和SharedArrayBuffer,
     // 而浏览器对共享内存等能力设置了更严格的安全条件，所以在vite.config里开启了跨源隔离并且在这里判断一下是否支持
-    if (!window.crossOriginIsolated) {
+    if (!window.crossOriginIsolated || typeof SharedArrayBuffer === "undefined" ) {
         throw new Error(
-            `当前浏览器未开启跨源隔离：` +
-            `安全环境=${window.isSecureContext}；` +
-            `隔离状态=${String(window.crossOriginIsolated)}；` +
-            `共享内存=${typeof SharedArrayBuffer}；` +
-            `后台脚本接管=${Boolean(navigator.serviceWorker?.controller)}`
+            "当前环境未提供游戏所需的跨源隔离或共享内存能力。" +
+            "移动端请使用已验证可运行的 Microsoft Edge 浏览器打开。"
         );
     }
 
@@ -75,20 +72,15 @@ export async function loadEngine(
     });
 
     const engineUrl = new URL("vcmiclient.js", resourceUrl).href;
-
-    // @vite-ignore 是给 Vite 的指令，保留运行时 URL；
     const { default: createEngine } = await import(
         /* @vite-ignore */ engineUrl
     );
-    // 工厂函数：调用一次，创建一套引擎实例
+
     const engine: VcmiEngine = await createEngine(options);
     const configRoot = "/home/web_user/.config/vcmi";
 
     engine.FS.mkdirTree(configRoot);
     engine.FS.mkdirTree("/home/web_user/.cache/vcmi");
-
-    // 设置界面语言为中文
-    // 中文显示通常需要文本、正确编码、可覆盖中文字形的字体共同配合，单改语言不够游戏内还是有字体错误，所以补了一个中文mod chinese-translation
     engine.FS.writeFile(
         `${configRoot}/settings.json`,
         JSON.stringify({
