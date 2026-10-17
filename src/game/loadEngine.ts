@@ -39,7 +39,13 @@ export async function loadEngine(
     // 当前 vcmi 是支持多线程的网页构建 同时使用了Web Worker和SharedArrayBuffer,
     // 而浏览器对共享内存等能力设置了更严格的安全条件，所以在vite.config里开启了跨源隔离并且在这里判断一下是否支持
     if (!window.crossOriginIsolated) {
-        throw new Error("当前页面未启用跨源隔离，请检查 Vite 的响应头配置");
+        throw new Error(
+            `当前浏览器未开启跨源隔离：` +
+            `安全环境=${window.isSecureContext}；` +
+            `隔离状态=${String(window.crossOriginIsolated)}；` +
+            `共享内存=${typeof SharedArrayBuffer}；` +
+            `后台脚本接管=${Boolean(navigator.serviceWorker?.controller)}`
+        );
     }
 
     const resourceUrl = new URL(`${import.meta.env.BASE_URL}vcmi/`,window.location.href);
