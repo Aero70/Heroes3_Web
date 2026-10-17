@@ -41,7 +41,7 @@ export async function loadEngine(
     if (!window.crossOriginIsolated || typeof SharedArrayBuffer === "undefined" ) {
         throw new Error(
             "当前环境未提供游戏所需的跨源隔离或共享内存能力。" +
-            "移动端请使用已验证可运行的 Microsoft Edge 浏览器打开。"
+            "移动端请使用已验证可运行的 Edge 浏览器打开。"
         );
     }
 

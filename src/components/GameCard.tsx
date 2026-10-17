@@ -44,7 +44,7 @@ export default function GameCard({
     return (
         <button 
             type="button"
-            className="card group" 
+            className="card group w-[16rem] h-[16rem] lg:w-[24rem] lg:h-[24rem] md:w-[18rem] md:h-[18rem]" 
             onPointerMove={handleCardMove}
             onPointerLeave={handleCardReset}
             onPointerCancel={handleCardReset}

@@ -265,8 +265,8 @@ export default function PageLayout () {
         </div> }
 
         <section className="relative w-full min-h-screen lg:h-screen lg:overflow-hidden z-10">
-            {!isStartGame && <div className="min-h-screen lg:h-full flex flex-col items-center lg:justify-center gap-6 lg:gap-12 z-10">
-                <div className="h-fit py-5 flex flex-col lg:flex-row gap-4 lg:gap-16 items-center justify-center">
+            {!isStartGame && <div className="min-h-screen lg:h-full flex flex-col items-center md:justify-center lg:justify-center gap-6 lg:gap-12 z-10">
+                <div className="h-fit py-5 flex flex-col md:flex-row lg:flex-row gap-4 md:gap-6 lg:gap-16 items-center justify-center">
                     <GameCard
                         title="深渊号角"
                         subtitle="Horn of the Abyss"
@@ -296,13 +296,13 @@ export default function PageLayout () {
                     />
                 </div>
                 
-                <div className="sticky bottom-2 z-40 w-full shrink-0 lg:static lg:w-auto">
+                <div className="sticky bottom-2 z-40 w-full shrink-0 lg:static lg:w-auto md:static md:w-auto ">
                     <InfoBox>
-                        <div className="tile flex flex-col w-full lg:w-4xl gap-2 lg:gap-6 lg:py-6 box-content">
+                        <div className="tile flex flex-col w-full md:w-4xl lg:w-4xl gap-2 lg:gap-6 lg:py-6 box-content">
                             <div className="w-full flex items-center justify-center text-[#fff6d6]">
                                 <div className="relative flex lg:block flex-col items-center justify-center gap-2 lg:gap-0">
                                     <h2 className="text-[1.4rem] m-0">{TitleText}</h2>
-                                    <span className="lg:absolute left-full top-1/2 -translate-y-1/2 lg:ml-3 whitespace-nowrap text-[.85rem] text-[#fff6d6]/70">
+                                    <span className="block w-full min-w-0 whitespace-normal break-words text-center text-[.85rem] text-[#fff6d6]/70 lg:absolute lg:left-full lg:top-1/2 lg:-translate-y-1/2 lg:ml-3 lg:w-64 lg:text-left " >
                                         {statusText}
                                     </span>
                                 </div>
